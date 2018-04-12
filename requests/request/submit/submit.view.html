@@ -1,0 +1,99 @@
+<ion-view title="Submit Request">
+    <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goBack()">
+            <i class="icon ion-ios-arrow-back"></i>
+            Back
+        </button>
+    </ion-nav-buttons>
+    <ion-content delegate-handle="contentTop" class="has-header">
+        <div class="list card round-shadow">
+            <ion-item class="item-divider item-positive">
+                Confirm Request Details
+            </ion-item>
+            <div class="item">
+                <p class="req-detail">
+                    <small>
+                        <b>Trip Title:&nbsp;</b>
+                        <span class="positive">
+                            {{requestSvc.currentRequest.title}}
+                        </span>
+                    </small>
+                </p>
+                <p class="req-detail">
+                    <small>
+                        <b>Traveler:&nbsp;</b>
+                        <span class="positive">
+                            {{requestSvc.currentRequest.travelerFirstName + " " + requestSvc.currentRequest.travelerLastName}}
+                        </span>
+                    </small>
+                </p>
+                <p class="req-detail">
+                    <small>
+                        <b>Purpose of Travel:&nbsp;</b>
+                        <span class="positive">
+                            {{requestSvc.currentRequest.purpose}}
+                        </span>
+                    </small>
+                </p>
+                <p class="req-detail">
+                    <small>
+                        <b>Date of Departure:&nbsp;</b>
+                        <span class="positive">
+                            {{requestSvc.currentRequest.segments[0]?utilitySvc.formatFlightDateTime(requestSvc.currentRequest.segments[0].departureDate, requestSvc.currentRequest.segments[0].departureTime):"N/A"}}
+                        </span>
+                    </small>
+                </p>
+                <p class="req-detail">
+                    <small>
+                        <b>Total Travel Segments:&nbsp;</b>
+                        <span class="positive">
+                            {{requestSvc.currentRequest.segments.length}}
+                        </span>
+                    </small>
+                </p>
+                <p class="req-detail">
+                    <small>
+                        <b>Submit Request To:&nbsp;</b>
+                        <span class="positive">
+                            {{settingsSvc.sportSupervisor.email?settingsSvc.sportSupervisor.name:"N/A - No Sport Supervisor Selected"}}
+                        </span>
+                    </small>
+                </p>
+                <p class="req-detail" style="padding-left:15px;">
+                    <small>
+                        <b>- Email:&nbsp;</b>
+                        <span class="positive">
+                            {{settingsSvc.sportSupervisor.email?settingsSvc.sportSupervisor.email:"N/A"}}
+                        </span>
+                    </small>
+                </p>
+                <p class="req-detail">
+                    <small>
+                        <b>FAU to Charge:&nbsp;</b>
+                        <span class="positive">
+                            {{fauString}}
+                        </span>
+                    </small>
+                </p>
+            </div>
+            <ion-item class="item-divider item-positive row-center row">
+                <div class="col col-80">
+                    Comments/Special Requests/Notes
+                </div>
+            </ion-item>
+            <label class="item item-input">
+                <textarea ng-model="requestSvc.currentRequest.comments" 
+                          placeholder="Add a comment, note, or special request here..." 
+                          rows="4">
+                </textarea>
+            </label>
+        </div>
+    </ion-content>
+    <button class="button button-block button-energized button-float"
+            style="bottom: 5px !important; background-color:#F2A900 !important;"
+            type="button"
+            ng-click="sendRequest(requestSvc.currentRequest)"
+            ng-click-debounce>
+        <b>SUBMIT TRAVEL REQUEST</b>
+    </button>
+</ion-view>

@@ -1,0 +1,196 @@
+<ion-view class="view-tabs-top">
+    <ion-nav-title>
+        {{requestSvc.currentSegment.departingAirport?requestSvc.currentSegment.departingAirport:"N/A"}} &#8594; {{requestSvc.currentSegment.arrivingAirport?requestSvc.currentSegment.arrivingAirport:"N/A"}}
+    </ion-nav-title>
+    <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goBack()">
+            <i class="icon ion-ios-arrow-back"></i>
+            Back
+        </button>
+    </ion-nav-buttons>
+    <div class="tabs tabs-top tabs-virtual row" style="height: 90px;">
+        <a class="tab-item disable-user-behavior active" 
+           ng-class="{active: activeIndex==0}"
+           ng-click="goToSlide(0)">
+            <img src="img/plane.png" width="64" height="64"
+                 class="faded row col-50 col-offset-25" style="height: 79%;"
+                 ng-class="{'inactive-img': activeIndex != 0}">
+            <span class="row col-50 col-offset-25" style="font-size: large;margin-top: -20px;">Flight</span> 
+		</a>
+        <a class="tab-item disable-user-behavior" 
+           ng-class="{active: activeIndex==1}"
+           ng-click="goToSlide(1)">
+            <img src="img/car.png" width="64" height="64"
+                 class="faded row col-50 col-offset-25" style="height: 79%;"
+                 ng-class="{'inactive-img': activeIndex != 1}">
+            <span class="row col-50 col-offset-25" style="font-size: large;margin-top: -20px;">Rental</span> 
+        </a>
+        <a class="tab-item disable-user-behavior" 
+           ng-class="{active: activeIndex==2}"
+           ng-click="goToSlide(2)">
+            <img src="img/hotel.png" width="64" height="64"
+                 class="faded row col-50 col-offset-25" style="height: 79%;"
+                 ng-class="{'inactive-img': activeIndex != 2}">
+            <span class="row col-50 col-offset-25" style="font-size: large;margin-top: -20px;">Hotel</span> 
+        </a>
+	</div>
+    <ion-content scroll="false" class="has-header" style="top:22%;" id="segment-detail-content">
+        <ion-slides options="sliderOptions" slider="slider">
+<!-- ********************************************************************************************** -->
+<!-- **************************************** FLIGHT SLIDE **************************************** -->
+<!-- ********************************************************************************************** -->
+            <ion-slide-page>
+                <div class="list card round-shadow" style="height: 90%;">
+                    <ion-item class="item-divider item row-center row">
+                        <div class="col col-80">
+                            Flight Details
+                        </div>
+                        <div class="col segment-edit-btn">
+                            <button class="button button-small icon ion-edit button-positive align-right req-btn"
+                                    ng-click="openModal(flightModal)">
+                            </button>
+                        </div>
+                    </ion-item>
+                    <ion-scroll class="segment-card-scroll">
+                        <ion-list>
+                            <div class="item">
+                                <label>Airline Preference</label>
+                                <span class="item-note">
+                                    {{requestSvc.currentSegment.preferredAirline?requestSvc.currentSegment.preferredAirline:"N/A"}}
+                                </span>
+                            </div>
+                            <div class="item">
+                                <label>Preferred Flight Number</label>
+                                <span class="item-note">
+                                    {{requestSvc.currentSegment.flightNumber?requestSvc.currentSegment.flightNumber:"N/A"}}
+                                </span>
+                            </div>
+                            <div class="item">
+                                <label>Departing Airport</label>
+                                <span class="item-note">
+                                    {{requestSvc.currentSegment.departingAirport?requestSvc.currentSegment.departingAirport:"N/A"}}
+                                </span>
+                            </div>
+                            <div class="item">
+                                <label>Arriving Airport</label>
+                                <span class="item-note">
+                                    {{requestSvc.currentSegment.arrivingAirport?requestSvc.currentSegment.arrivingAirport:"N/A"}}
+                                </span>
+                            </div>
+                            <div class="item">
+                                <label>Departure Date</label>
+                                <span class="item-note">
+                                    {{requestSvc.currentSegment.departureDate?utilitySvc.formatDate(requestSvc.currentSegment.departureDate):"N/A"}}
+                                </span>
+                            </div>
+                            <div class="item">
+                                <label>Departure Time</label>
+                                <span class="item-note">
+                                    {{requestSvc.currentSegment.departureTime?utilitySvc.formatTime(requestSvc.currentSegment.departureTime):"N/A"}}
+                                </span>
+                            </div>
+                            <div class="item">
+                                <label>Arrival Time</label>
+                                <span class="item-note">
+                                    {{requestSvc.currentSegment.arrivalTime?utilitySvc.formatTime(requestSvc.currentSegment.arrivalTime):"N/A"}}
+                                </span>
+                            </div>
+                            <div class="item">
+                                <label>Return Flight?</label>
+                                <span class="item-note">
+                                    {{requestSvc.currentSegment.isReturnFlight?requestSvc.currentSegment.mustReturnBy?"Yes - Must return by "+utilitySvc.formatTime(requestSvc.currentSegment.mustReturnBy):"Yes":"No"}}
+                                </span>
+                            </div>
+                            <ion-item></ion-item>
+                        </ion-list>
+                    </ion-scroll>
+                    <!-- <div class="item" ng-if="requestSvc.currentSegment.isReturnFlight">
+                        <label>Must Return By</label>
+                        <span class="item-note">
+                            {{utilitySvc.formatTime(requestSvc.currentSegment.mustReturnBy)}}
+                        </span>
+                    </div> -->
+                    <ion-item class="item-divider footer-divider"></ion-item>
+                </div>
+            </ion-slide-page>
+<!-- ********************************************************************************************** -->
+<!-- **************************************** RENTAL SLIDE **************************************** -->
+<!-- ********************************************************************************************** -->
+            <ion-slide-page>
+                <div class="list card round-shadow" style="height: 90%;">
+                    <ion-item class="item-divider row-center row">
+                        <div class="col col-80">
+                            Rental Details
+                        </div>
+                        <div class="col segment-edit-btn">
+                            <button class="button button-small icon ion-edit button-positive align-right req-btn"
+                                    ng-click="openModal(rentalModal)">
+                            </button>
+                        </div>
+                    </ion-item>
+                    <div class="item">
+                        <label>Company Preference</label>
+                        <span class="item-note">
+                            {{requestSvc.currentSegment.rental.preferredCompany?requestSvc.currentSegment.rental.preferredCompany:"N/A"}}
+                        </span>
+                    </div>
+                    <div class="item">
+                        <label>Pick Up Date</label>
+                        <span class="item-note">
+                            {{requestSvc.currentSegment.rental.preferredCompany?utilitySvc.formatDate(requestSvc.currentSegment.rental.pickupDate):"N/A"}}
+                        </span>
+                    </div>
+                    <div class="item">
+                        <label>Drop Off Date</label>
+                        <span class="item-note">
+                            {{requestSvc.currentSegment.rental.preferredCompany?utilitySvc.formatDate(requestSvc.currentSegment.rental.dropoffDate):"N/A"}}
+                        </span>
+                    </div>
+                    <ion-item class="item-divider footer-divider"></ion-item>
+                </div>
+            </ion-slide-page>
+<!-- ********************************************************************************************** -->
+<!-- **************************************** HOTEL SLIDE ***************************************** -->
+<!-- ********************************************************************************************** -->
+            <ion-slide-page>
+                <div class="list card round-shadow" style="height: 90%;">
+                    <ion-item class="item-divider row-center row">
+                        <div class="col col-80">
+                            Hotel Details
+                        </div>
+                        <div class="col segment-edit-btn">
+                            <button class="button button-small icon ion-edit button-positive align-right req-btn"
+                                    ng-click="openModal(hotelModal)">
+                            </button>
+                        </div>
+                    </ion-item>
+                    <div class="item">
+                        <label>Hotel Preference</label>
+                        <span class="item-note">
+                            {{requestSvc.currentSegment.hotel.preferredHotel?requestSvc.currentSegment.hotel.preferredHotel:"N/A"}}
+                        </span>
+                    </div>
+                    <div class="item">
+                        <label>Hotel Address</label>
+                        <span class="item-note">
+                            {{requestSvc.currentSegment.hotel.address?requestSvc.currentSegment.hotel.address:"N/A"}}
+                        </span>
+                    </div>
+                    <div class="item">
+                        <label>Check In Date</label>
+                        <span class="item-note">
+                            {{requestSvc.currentSegment.hotel.preferredHotel?utilitySvc.formatDate(requestSvc.currentSegment.hotel.checkInDate):"N/A"}}
+                        </span>
+                    </div>
+                    <div class="item">
+                        <label>Check Out Date</label>
+                        <span class="item-note">
+                            {{requestSvc.currentSegment.hotel.preferredHotel?utilitySvc.formatDate(requestSvc.currentSegment.hotel.checkOutDate):"N/A"}}
+                        </span>
+                    </div>
+                    <ion-item class="item-divider footer-divider"></ion-item>
+                </div>
+            </ion-slide-page>
+        </ion-slides>
+    </ion-content>
+</ion-view>

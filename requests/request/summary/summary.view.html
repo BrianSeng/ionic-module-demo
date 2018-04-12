@@ -1,0 +1,121 @@
+<ion-view title="Request Summary" hide-back-button="true">
+    <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goBack()">
+            <i class="icon ion-ios-arrow-back"></i>
+            Back
+        </button>
+    </ion-nav-buttons>
+    <!-- <ion-nav-buttons side="right">
+        <button class="button button-positive req-btn"
+                ng-click="sendRequest(requestSvc.currentRequest)"
+                ng-click-debounce>
+            Submit
+        </button>
+    </ion-nav-buttons> -->
+    <ion-content delegate-handle="contentTop" padding="true" class="has-header">
+        <div class="list card round-shadow" style="margin-top: 0px;">
+            <ion-item class="item-divider row-center row">
+                <div class="col col-80">
+                    Traveler Info
+                </div>
+                <div class="col col-offset-10">
+                    <button class="button button-small icon ion-edit button-positive align-right req-btn"
+                            ng-click="openTravelerModal()">
+                    </button>
+                </div>
+            </ion-item>
+            <div class="item item-icon-left">
+                <i class="icon ion-ios-information" style="font-size: 24px;"></i>
+                <b>Trip Title</b>
+                <span class="item-note">
+                    {{requestSvc.currentRequest.title}}
+                </span>
+            </div>
+            <div class="item item-icon-left">
+                <i class="icon ion-flag" style="font-size: 24px;"></i>
+                <b>Trip Purpose</b>
+                <span class="item-note">
+                    {{requestSvc.currentRequest.purpose}}
+                </span>
+            </div>
+            <div class="item item-icon-left">
+                <i class="icon ion-person" style="font-size: 24px;"></i>
+                <b>Traveler</b>
+                <span class="item-note">
+                    {{ requestSvc.currentRequest.travelerFirstName + " " + requestSvc.currentRequest.travelerMiddleName + " " + requestSvc.currentRequest.travelerLastName }}
+                </span>
+            </div>
+            <div class="item item-icon-left">
+                <i class="icon ion-email" style="font-size: 24px;"></i>
+                <b>Email</b>
+                <span class="item-note">
+                    {{requestSvc.currentRequest.travelerEmail}}
+                </span>
+            </div>
+            <div class="item item-icon-left">
+                <i class="icon ion-iphone" style="font-size: 24px;"></i>
+                <b>Cell Number</b>
+                <span class="item-note">
+                    {{requestSvc.currentRequest.travelerCell}}
+                </span>
+            </div>
+            <div class="item item-icon-left">
+                <i class="icon ion-android-calendar" style="font-size: 24px;"></i>
+                <b>Date of Birth</b>
+                <span class="item-note">
+                    {{utilitySvc.formatDate(requestSvc.currentRequest.travelerDob)}}
+                </span>
+            </div>
+            <div class="item item-icon-left">
+                <i class="icon ion-transgender" style="font-size: 24px;"></i>
+                <b>Gender</b>
+                <span class="item-note">
+                    {{requestSvc.currentRequest.travelerGender}}
+                </span>
+            </div>
+            <div class="item item-icon-left">
+                <i class="icon ion-pound" style="font-size: 24px;"></i>
+                <b>Known Traveler Number</b>
+                <span class="item-note">
+                    {{requestSvc.currentRequest.knownTravelerNumber}}
+                </span>
+            </div>
+        </div>
+        <div class="list card round-shadow">
+            <ion-item class="item-divider row-center row">
+                <div class="col col-80">
+                    FAU to Charge
+                </div>
+                <div class="col col-offset-10">
+                    <button class="button button-small icon ion-edit button-positive align-right req-btn"
+                            ng-click="openFauModal()">
+                    </button>
+                </div>
+            </ion-item>
+            <div class="item">
+                <b>Account</b>
+                <span class="item-note" ng-if="requestSvc.currentRequest.fauAccount.acctNumber">
+                    {{requestSvc.currentRequest.fauAccount.acctName + " - " + requestSvc.currentRequest.fauAccount.acctNumber}}
+                </span>
+                <span class="item-note" ng-if="!requestSvc.currentRequest.fauAccount.acctNumber">
+                    N/A
+                </span>
+            </div>
+            <div class="item">
+                <b>Cost Center</b>
+                <span class="item-note" ng-if="requestSvc.currentRequest.fauCC.code">
+                        {{requestSvc.currentRequest.fauCC.code + " - " + requestSvc.currentRequest.fauCC.ccName}}
+                </span>
+                <span class="item-note" ng-if="!requestSvc.currentRequest.fauCC.code">
+                    N/A
+                </span>
+            </div>
+            <div class="item">
+                <b>Project</b>
+                <span class="item-note">
+                    {{requestSvc.currentRequest.fauProject?requestSvc.currentRequest.fauProject:"N/A"}}
+                </span>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,73 @@
+<div class="modal">
+    <ion-header-bar class="bar-positive">
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeModal(flightModal)">
+                <i class="icon ion-ios-arrow-back"></i>
+                Cancel
+            </button>
+        </div>
+        <h1 class="title">Update Flight Info</h1>
+        <div class="buttons">
+            <button class="button button-positive req-btn" ng-click="saveSegment(flightModal)">
+                Save
+            </button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="has-header">
+        <ion-list>
+            <ion-item class="item-divider">
+                Flight Details
+            </ion-item>
+            <ion-item class="item-input faded" ng-show="!segmentCopy.isCharterFlight">
+                <span class="input-label">Preferred Airline</span>
+                <input type="text" ng-model="segmentCopy.preferredAirline">
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">Preferred Flight Number</span>
+                <input type="text" ng-model="segmentCopy.flightNumber">
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">Departing Airport</span>
+                <input type="text" ng-model="segmentCopy.departingAirport">
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">Arriving Airport</span>
+                <input type="text" ng-model="segmentCopy.arrivingAirport">
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">Departure Date</span>
+                <input type="date" ng-model="segmentCopy.departureDate">
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">Departure Time</span>
+                <input type="time" ng-model="segmentCopy.departureTime">
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">Arrival Time</span>
+                <input type="time" ng-model="segmentCopy.arrivalTime">
+            </ion-item>
+            <ion-item class="item-toggle">
+                Check here if charter flight
+                <label class="toggle toggle-energized">
+                    <input type="checkbox" ng-model="segmentCopy.isCharterFlight">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </ion-item>
+            <ion-item class="item-toggle">
+                Is this a return flight?
+                <label class="toggle toggle-energized">
+                    <input type="checkbox" ng-model="segmentCopy.isReturnFlight">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </ion-item>
+            <ion-item class="item-input faded" ng-show="segmentCopy.isReturnFlight">
+                <span class="input-label">Must Return By</span>
+                <input type="time" ng-model="segmentCopy.mustReturnBy">
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</div>

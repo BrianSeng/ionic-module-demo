@@ -1,0 +1,337 @@
+<ion-view title="Add A Segment">
+    <ion-nav-buttons side="left">
+        <!-- <button class="button button-clear" ng-show="activeIndex != 0" ion-wizard-previous>
+            <i class="icon ion-ios-arrow-back"></i>
+            Back
+        </button>
+        <button class="button button-clear" ng-click="goBack()" ng-show="activeIndex == 0">
+            <i class="icon ion-ios-arrow-back"></i>
+            Cancel
+        </button> -->
+        <button class="button button-clear" ng-class="{ 'hide ng-hide': activeIndex == 0 }" ion-wizard-previous>
+            <i class="icon ion-ios-arrow-back"></i>
+            Back
+        </button>
+        <button class="button button-clear" ng-click="goBack()" ng-class="{ hide: activeIndex != 0 }">
+            <i class="icon ion-ios-arrow-back"></i>
+            Cancel
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-clear" ion-wizard-next ng-class="{ hide: activeIndex == 3 }">
+            Next
+            <i class="icon ion-ios-arrow-forward"></i>
+        </button>
+    </ion-nav-buttons>
+    <div class="wizard-bar bar bar-subheader bar-stable row responsive-sm" style="height: 18%;">
+        <div class="row">
+            <div class="col">
+                <img src="img/plane.png" width="54" height="54" 
+                     class="wizard-img faded" 
+                     ng-show="activeIndex == 0">
+            </div>
+            <div class="col">
+                <img src="img/car.png" width="54" height="54" 
+                     class="wizard-img faded ng-hide" 
+                     style="margin-top:5px;"
+                     ng-show="activeIndex == 1"
+                     ng-cloak>
+            </div>
+            <div class="col">
+                <img src="img/hotel.png" width="54" height="54" 
+                     class="wizard-img faded ng-hide" 
+                     ng-show="activeIndex == 2"
+                     ng-cloak>
+            </div>
+            <div class="col">
+                <img src="img/check-mark.png" width="54" height="54" 
+                     class="faded ng-hide" style="margin-left:30%"
+                     ng-show="activeIndex == 3"
+                     ng-cloak>
+            </div>
+        </div>
+        <div class="feature-panel col col-offset-25" style="margin-bottom: 0px;">
+            <ul class="breadcrumb row">
+                <li class="next-step col" 
+                    ng-class="{ active: activeIndex == 0 }"
+                    ng-click="goToSlide(0)">
+                    <span class="wizard-step">Flight</span>
+                </li>
+                <li class="next-step col" 
+                    ng-class="{ active: activeIndex == 1 }"
+                    ng-click="goToSlide(1)">
+                    <span class="wizard-step">Rental</span>
+                </li>
+                <li class="next-step col" 
+                    ng-class="{ active: activeIndex == 2 }"
+                    ng-click="goToSlide(2)">
+                    <span class="wizard-step">Hotel</span>
+                </li>
+                <li class="next-step col" 
+                    ng-class="{ active: activeIndex == 3 }"
+                    ng-click="goToSlide(3)">
+                    <span class="wizard-step">Confirm</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <button ng-class="{ 'hide ng-hide': activeIndex != 3 }"
+            ng-click="addSegment(currentSegment)" 
+            type="button"
+            class="button button-block button-balanced button-float">
+        <b>CONFIRM & ADD</b>
+    </button>
+    <ion-slides options="sliderOptions" slider="slider" ion-wizard>
+<!-- ************************************************************************************************ -->
+<!-- **************************************** WIZARD SLIDE 1 **************************************** -->
+<!-- ************************************************************************************************ -->
+        <ion-slide-page ion-wizard-step>
+            <ion-content delegate-handle="contentTop" class="has-header wizard-content" style="top:29%;">
+                <ion-list>
+                    <ion-item class="item-divider item-positive">
+                        Flight Details
+                    </ion-item>
+                    <ion-item class="item-input faded">
+                        <span class="input-label">Preferred Airline</span>
+                        <input type="text" ng-model="currentSegment.preferredAirline">
+                    </ion-item>
+                    <ion-item class="item-input">
+                        <span class="input-label">Preferred Flight Number</span>
+                        <input type="text" ng-model="currentSegment.flightNumber">
+                    </ion-item>
+                    <ion-item class="item-input">
+                        <span class="input-label">Departing Airport</span>
+                        <input type="text" ng-model="currentSegment.departingAirport">
+                    </ion-item>
+                    <ion-item class="item-input">
+                        <span class="input-label">Arriving Airport</span>
+                        <input type="text" ng-model="currentSegment.arrivingAirport">
+                    </ion-item>
+                    <ion-item class="item-input">
+                        <span class="input-label">Departure Date</span>
+                        <input type="date" ng-model="currentSegment.departureDate">
+                    </ion-item>
+                    <ion-item class="item-input">
+                        <span class="input-label">Departure Time</span>
+                        <input type="time" ng-model="currentSegment.departureTime">
+                    </ion-item>
+                    <ion-item class="item-input">
+                        <span class="input-label">Arrival Time</span>
+                        <input type="time" ng-model="currentSegment.arrivalTime">
+                    </ion-item>
+                    <ion-item class="item-toggle">
+                        Check here if charter flight
+                        <label class="toggle toggle-energized">
+                            <input type="checkbox" ng-model="currentSegment.isCharterFlight">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </ion-item>
+                    <ion-item class="item-toggle">
+                        Is this a return flight?
+                        <label class="toggle toggle-energized">
+                            <input type="checkbox" ng-model="currentSegment.isReturnFlight">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </ion-item>
+                    <ion-item class="item-input faded" ng-show="currentSegment.isReturnFlight">
+                        <span class="input-label">Must Return By</span>
+                        <input type="time" ng-model="currentSegment.mustReturnBy">
+                    </ion-item>
+                </ion-list>
+                <div style="width:100%; height: 40px;"></div>
+            </ion-content>
+        </ion-slide-page>
+<!-- ************************************************************************************************ -->
+<!-- **************************************** WIZARD SLIDE 2 **************************************** -->
+<!-- ************************************************************************************************ -->
+        <ion-slide-page ion-wizard-step>
+            <ion-content class="has-header wizard-content" style="top:29%;">
+                <ion-list>
+                    <ion-item class="item-divider item-positive">
+                        Rental Details
+                    </ion-item>
+                    <ion-item class="item-toggle">
+                        Do you need a rental car?
+                        <label class="toggle toggle-energized">
+                            <input type="checkbox" ng-model="currentSegment.hasRental">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </ion-item>
+                    <label class="item item-input item-stacked-label" ng-show="currentSegment.hasRental">
+                        <span class="input-label">Preferred Rental Company</span>
+                        <input type="text" ng-model="currentSegment.rental.preferredCompany" placeholder="ex. Hertz">
+                    </label>
+                    <ion-item class="item-input faded" ng-show="currentSegment.hasRental">
+                        <span class="input-label">Pick Up Date</span>
+                        <input type="date" ng-model="currentSegment.rental.pickupDate">
+                    </ion-item>
+                    <ion-item class="item-input faded" ng-show="currentSegment.hasRental">
+                        <span class="input-label">Pick Up Time</span>
+                        <input type="time" ng-model="currentSegment.rental.pickupTime">
+                    </ion-item>
+                    <ion-item class="item-input faded" ng-show="currentSegment.hasRental">
+                        <span class="input-label">Drop Off Date</span>
+                        <input type="date" ng-model="currentSegment.rental.dropoffDate">
+                    </ion-item>
+                    <ion-item class="item-input faded" ng-show="currentSegment.hasRental">
+                        <span class="input-label">Drop Off Time</span>
+                        <input type="time" ng-model="currentSegment.rental.dropoffTime">
+                    </ion-item>
+                </ion-list>
+            </ion-content>
+        </ion-slide-page>
+<!-- ************************************************************************************************ -->
+<!-- **************************************** WIZARD SLIDE 3 **************************************** -->
+<!-- ************************************************************************************************ -->
+        <ion-slide-page ion-wizard-step>
+            <ion-content class="has-header wizard-content" style="top:29%;">
+                <ion-list>
+                    <ion-item class="item-divider item-positive">
+                        Hotel Details
+                    </ion-item>
+                    <ion-item class="item-toggle">
+                        Do you need a hotel room?
+                        <label class="toggle toggle-energized">
+                            <input type="checkbox" ng-model="currentSegment.hasHotel">
+                            <div class="track">
+                                <div class="handle"></div>
+                            </div>
+                        </label>
+                    </ion-item>
+                    <ion-item class="item-input faded" ng-show="currentSegment.hasHotel">
+                        <span class="input-label">Preferred Hotel</span>
+                        <input type="text" ng-model="currentSegment.hotel.preferredHotel" placeholder="ex. Best Western">
+                    </ion-item>
+                    <ion-item class="item-input item-stacked-label faded" ng-show="currentSegment.hasHotel">
+                        <span class="input-label">Hotel Address</span>
+                        <input type="text" ng-model="currentSegment.hotel.address">
+                    </ion-item>
+                    <ion-item class="item-input faded" ng-show="currentSegment.hasHotel">
+                        <span class="input-label">Check In Date</span>
+                        <input type="date" ng-model="currentSegment.hotel.checkInDate">
+                    </ion-item>
+                    <ion-item class="item-input faded" ng-show="currentSegment.hasHotel">
+                        <span class="input-label">Check Out Date</span>
+                        <input type="date" ng-model="currentSegment.hotel.checkOutDate">
+                    </ion-item>
+                </ion-list>
+            </ion-content>
+        </ion-slide-page>
+<!-- ************************************************************************************************ -->
+<!-- **************************************** WIZARD SLIDE 4 **************************************** -->
+<!-- ************************************************************************************************ -->
+        <ion-slide-page ion-wizard-step>
+            <ion-content class="has-header wizard-content" style="top:29%;">
+                <ion-list>
+                    <ion-item class="item-divider item-positive">
+                        Confirm Segment Details
+                    </ion-item>
+                </ion-list>
+                <div class="list card round-shadow">
+                    <div class="item item-divider">
+                        Flight
+                    </div>
+                    <div class="item">
+                        <p class="req-detail" ng-if="!currentSegment.isCharterFlight && currentSegment.preferredAirline">
+                            <small>
+                                <b>Preferred Airline:&nbsp;</b><span class="positive">{{currentSegment.preferredAirline?currentSegment.preferredAirline:"N/A"}}</span>
+                            </small>
+                        </p>
+                        <p class="req-detail" ng-if="!currentSegment.isCharterFlight && currentSegment.preferredAirline">
+                            <small>
+                                <b>Preferred Flight Number:&nbsp;</b><span class="positive">{{currentSegment.flightNumber?currentSegment.flightNumber:"N/A"}}</span>
+                            </small>
+                        </p>
+                        <p class="req-detail">
+                            <small>
+                                <b>Departing From:&nbsp;</b><span class="positive">{{currentSegment.departingAirport}}</span>
+                            </small>
+                        </p>
+                        <p class="req-detail">
+                            <small style="padding-left:15px;">
+                                <b>- On&nbsp;</b><span class="positive">{{utilitySvc.formatFlightDateTime(currentSegment.departureDate, currentSegment.departureTime)}}</span>
+                            </small>
+                        </p>
+                        <p class="req-detail">
+                            <small>
+                                <b>Arriving To:&nbsp;</b><span class="positive">{{currentSegment.arrivingAirport}}</span>
+                            </small>
+                        </p>
+                        <p class="req-detail" ng-if="currentSegment.arrivalTime">
+                            <small style="padding-left:15px;">
+                                <b>- At&nbsp;</b><span class="positive">{{utilitySvc.formatTime(currentSegment.arrivalTime)}}</span>
+                            </small>
+                        </p>
+                        <p class="req-detail">
+                            <small>
+                                <b>Charter Flight?&nbsp;</b><span class="positive">{{currentSegment.isCharterFlight?"Yes":"No"}}</span>
+                            </small>
+                        </p>
+                        <p class="req-detail">
+                            <small>
+                                <b>Return Flight?&nbsp;</b><span class="positive">{{currentSegment.isReturnFlight?"Yes":"No"}}</span>
+                            </small>
+                        </p>
+                        <p class="req-detail" ng-if="currentSegment.isReturnFlight && currentSegment.mustReturnBy">
+                            <small style="padding-left:15px;">
+                                <b>- Must Return By:&nbsp;</b><span class="positive">{{utilitySvc.formatTime(currentSegment.mustReturnBy)}}</span>
+                            </small>
+                        </p>
+                    </div>
+                    <div class="item item-divider">
+                        Rental
+                    </div>
+                    <div class="item" ng-if="currentSegment.hasRental && currentSegment.rental">
+                        <p class="req-detail">
+                            <small>
+                                <b>Preferred Company:&nbsp;</b><span class="positive">{{currentSegment.rental.preferredCompany}}</span>
+                            </small>
+                        </p>
+                        <p class="req-detail">
+                            <small>
+                                <b>Pick Up On:&nbsp;</b><span class="positive">{{utilitySvc.formatFlightDateTime(currentSegment.rental.pickupDate, currentSegment.rental.pickupTime)}}</span>
+                            </small>
+                        </p>
+                        <p class="req-detail">
+                            <small>
+                                <b>Drop Off On:&nbsp;</b><span class="positive">{{utilitySvc.formatFlightDateTime(currentSegment.rental.dropoffDate, currentSegment.rental.dropoffTime)}}</span>
+                            </small>
+                        </p>
+                    </div>
+                    <div class="item item-divider">
+                        Hotel
+                    </div>
+                    <div class="item" ng-if="currentSegment.hasHotel && currentSegment.hotel">
+                        <p class="req-detail">
+                            <small>
+                                <b>Preferred Hotel:&nbsp;</b><span class="positive">{{currentSegment.hotel.preferredHotel}}</span>
+                            </small>
+                        </p>
+                        <p class="req-detail">
+                            <small>
+                                <b>Hotel Address:&nbsp;</b><span class="positive">{{currentSegment.hotel.address}}</span>
+                            </small>
+                        </p>
+                        <p class="req-detail">
+                            <small>
+                                <b>Check In Date:&nbsp;</b><span class="positive">{{utilitySvc.formatDate(currentSegment.hotel.checkInDate)}}</span>
+                            </small>
+                        </p>
+                        <p class="req-detail">
+                            <small>
+                                <b>Check Out Date:&nbsp;</b><span class="positive">{{utilitySvc.formatDate(currentSegment.hotel.checkOutDate)}}</span>
+                            </small>
+                        </p>
+                    </div>
+                </div>
+                <div style="width:100%; height: 60px;"></div>
+            </ion-content>
+        </ion-slide-page>
+    </ion-slides>
+</ion-view>

@@ -1,0 +1,64 @@
+<div class="modal">
+    <ion-header-bar class="bar-positive">
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeModal(fauModal)">
+                <i class="icon ion-ios-arrow-back"></i>
+                Cancel
+            </button>
+        </div>
+        <h1 class="title">Update FAU</h1>
+        <div class="buttons">
+            <button class="button button-positive req-btn" ng-click="saveFau()">
+                Save
+            </button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="has-header">
+        <ion-list>
+            <ion-item class="item-divider">
+                Account Details
+            </ion-item>
+            <!-- <ion-item class="item-input">
+                <span class="input-label">Account</span>
+                <input type="text" ng-model="currentFau.account">
+            </ion-item> -->
+            <label class="item item-input item-select setting" style="display: block;">
+                <div class="row row-center" style="padding-left:0px;">
+                    <i class="icon ion-ios-football col-10" style="font-size: 24px;"></i>
+                    <span class="input-label label-size col-90" style="max-width:100%;width:100%;">
+                        <b>Sport Fund to Charge</b>
+                    </span>
+                </div>
+                <select ng-model="currentFau.account" 
+                        style="width:100%;max-width:100%;"
+                        ng-options="acct.acctName for acct in accountSvc.accounts">
+                </select>
+            </label>
+            <!-- <ion-item class="item-input">
+                <span class="input-label">Fund</span>
+                <input type="text" ng-model="currentFau.cc">
+            </ion-item> -->
+            <label class="item item-input item-select setting" style="display: block;">
+                <div class="row row-center" style="padding-left:0px;">
+                    <i class="icon ion-card col-10" style="font-size: 24px;"></i>
+                    <span class="input-label label-size col-90" style="max-width:100%;width:100%;">
+                        <b>Cost Center (CC)</b>
+                    </span>
+                </div>
+                <select ng-model="currentFau.cc" 
+                        style="width:100%;max-width:100%;"
+                        ng-options="cc.ccName for cc in accountSvc.costCenters">
+                </select>
+            </label>
+            <!-- <ion-item class="item-input">
+                <span class="input-label">Project</span>
+                <input type="text" ng-model="currentFau.project">
+            </ion-item> -->
+            <ion-item class="item-input">
+                <i class="icon ion-clipboard col-10" style="font-size: 24px;"></i>
+                <span class="input-label label-size"><b>Project</b></span>
+                <input type="text" ng-model="currentFau.project" placeholder="Input FAU Project">
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</div>

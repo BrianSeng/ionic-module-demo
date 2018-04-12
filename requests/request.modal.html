@@ -1,0 +1,76 @@
+<div class="modal">
+    <ion-header-bar class="bar-positive">
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeModal(travelerModal)">
+                <i class="icon ion-ios-arrow-back"></i>
+                Cancel
+            </button>
+        </div>
+        <h1 class="title">{{modalTitle}}</h1>
+        <div class="buttons">
+            <button class="button button-positive req-btn" ng-click="saveRequest()">{{headerBtn}}</button>
+        </div>
+    </ion-header-bar>
+    <div class="bar bar-subheader bar-stable text-center row-center" style="min-height:50px; overflow:hidden;">
+        <i class="icon ion-information-circled col-10" style="font-size: 24px;"></i>
+        <span style="padding-top:2px;">
+            All names should be as they appear on your legal ID
+        </span>
+    </div>
+    <ion-content class="has-header has-subheader" style="margin-top:10px;">
+        <ion-list>
+            <ion-item class="item-divider">
+                Request Details
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">Trip Title</span>
+                <input type="text" ng-model="newRequest.title">
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">Purpose</span>
+                <input type="text" ng-model="newRequest.purpose">
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">Legal First Name</span>
+                <input type="text" ng-model="newRequest.travelerFirstName">
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">Legal Middle Name</span>
+                <input type="text" ng-model="newRequest.travelerMiddleName">
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">Legal Last Name</span>
+                <input type="text" ng-model="newRequest.travelerLastName">
+            </ion-item>
+            <!-- <ion-item class="item-input">
+                <span class="input-label">Gender</span>
+                <input type="text" ng-model="newRequest.travelerGender">
+            </ion-item> -->
+            <label class="item item-input item-select">
+                <span class="input-label">Gender</span>
+                <select ng-model="newRequest.travelerGender">
+                    <option value="">Select one...</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </label>
+            <ion-item class="item-input">
+                <span class="input-label">Birthdate</span>
+                <input type="date" ng-model="newRequest.travelerDob">
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">Cell</span>
+                <input type="text" ng-model="newRequest.travelerCell">
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">Email</span>
+                <input type="text" ng-model="newRequest.travelerEmail">
+            </ion-item>
+            <ion-item class="item-input">
+                <span class="input-label">Known Traveler Number</span>
+                <input type="text" ng-model="newRequest.knownTravelerNumber">
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</div>

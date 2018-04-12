@@ -1,0 +1,77 @@
+<ion-view view-title="Requests" hide-back-button="true">
+	<ion-nav-buttons side="right">
+		<button class="button icon ion-plus button-positive req-btn" ng-click="openModal()" style="padding: 0 6px;"></button>
+	</ion-nav-buttons>
+	<ion-content>
+		<ion-list can-swipe="true">
+
+            <ion-item class="item-divider">Pending Requests</ion-item>
+            
+			<ion-item ng-repeat="r in requestSvc.requests | filter:{isSubmitted:false}"
+						class="req-container"
+						ng-click="gotoRequest(r)">
+				<div class="row row-center">
+					<div class="col-10">
+						<i class="icon ion-plane req-icon"></i>
+					</div>
+					<div class="col-67 icon-spacing">
+                        <div class="truncate-ellipses">
+                            <span class="req-title">{{r.title}}</span>                                
+                        </div>
+                        <p class="req-detail">
+                            <small>Traveler: {{r.travelerFirstName + " " + r.travelerLastName}}</small>
+                        </p>
+						<p class="req-detail">
+							<small>Purpose of Travel: {{r.purpose}}</small>
+                        </p>
+                        <p class="req-detail">
+                            <small>Total Travel Segments: {{r.segments.length}}</small>
+                        </p>
+					</div>
+					<div class="col col-offset-20">
+						<i class="icon ion-chevron-right align-right energized" style="font-size: 48px; padding-left: 15px;"></i>
+					</div>
+				</div>
+				<ion-option-button class="button-balanced" ng-click-debounce ng-click="sendRequest(r)">
+					Submit
+				</ion-option-button>
+				<ion-option-button class="button-assertive" ng-click="deleteRequest(r)">
+					Delete
+				</ion-option-button>
+			</ion-item>
+
+            <ion-item class="item-divider">Submitted Requests</ion-item>
+            
+			<ion-item ng-repeat="r in requestSvc.requests | filter:{isSubmitted:true}"
+						class="req-container" 
+						ng-click="gotoRequest(r)">
+				<div class="row row-center">
+					<div class="col-10">
+						<i class="icon ion-plane req-icon"></i>
+					</div>
+					<div class="col-67 icon-spacing">
+                            <span class="req-title">{{r.title}}</span>
+                            <p class="req-detail">
+                                <small>Traveler: {{r.travelerFirstName + " " + r.travelerLastName}}</small>
+                            </p>
+                            <p class="req-detail">
+                                <small>Purpose of Travel: {{r.purpose}}</small>
+                            </p>
+                            <p class="req-detail">
+                                <small>Total Travel Segments: {{r.segments.length}}</small>
+                            </p>
+                        </div>
+					<div class="col col-offset-20">
+						<i class="icon ion-chevron-right align-right energized" style="font-size: 48px; padding-left: 15px;"></i>
+					</div>
+				</div>
+				<ion-option-button class="button-balanced" ng-click-debounce ng-click="sendRequest(r)">
+					Submit
+				</ion-option-button>
+				<ion-option-button class="button-assertive" ng-click="deleteRequest(r)">
+					Delete
+				</ion-option-button>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

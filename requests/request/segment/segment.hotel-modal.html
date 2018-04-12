@@ -1,0 +1,39 @@
+<div class="modal">
+    <ion-header-bar class="bar-positive">
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeModal(hotelModal)">
+                <i class="icon ion-ios-arrow-back"></i>
+                Cancel
+            </button>
+        </div>
+        <h1 class="title">Update Hotel Info</h1>
+        <div class="buttons">
+            <button class="button button-positive req-btn" ng-click="saveSegment(hotelModal)">
+                Save
+            </button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="has-header">
+        <ion-list>
+            <ion-item class="item-divider">
+                Hotel Details
+            </ion-item>
+            <ion-item class="item-input faded">
+                <span class="input-label">Preferred Hotel</span>
+                <input type="text" ng-model="segmentCopy.hotel.preferredHotel">
+            </ion-item>
+            <ion-item class="item-input item-stacked-label faded">
+                <span class="input-label">Hotel Address</span>
+                <input type="text" ng-model="segmentCopy.hotel.address">
+            </ion-item>
+            <ion-item class="item-input faded">
+                <span class="input-label">Check In Date</span>
+                <input type="date" ng-model="segmentCopy.hotel.checkInDate">
+            </ion-item>
+            <ion-item class="item-input faded">
+                <span class="input-label">Check Out Date</span>
+                <input type="date" ng-model="segmentCopy.hotel.checkOutDate">
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</div>

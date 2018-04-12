@@ -1,0 +1,81 @@
+<ion-view title="Travel Segments">
+    <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goBack()">
+            <i class="icon ion-ios-arrow-back"></i>
+            Back
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button icon ion-plus button-positive req-btn" 
+                style="padding: 0 6px;"
+                ng-click="openSegmentWizard()">
+        </button>
+    </ion-nav-buttons>
+    <ion-content delegate-handle="contentTop" class="has-header">
+
+        <!-- msg to show when segments array is empty -->
+        <div ng-if="!requestSvc.currentRequest.segments.length"
+             style="text-align:center;opacity:0.4; margin-top:15%;">
+            <div class="row">
+                <div class="col-80 col-offset-10">
+                    <img src="img/error.png" class="inactive-img" />
+                </div>
+            </div>
+            <h3>No Travel Segments Recorded Yet</h3>
+        </div>
+
+        <ion-list can-swipe="true">
+            <!-- will ng-repeat the div to get 2 ion-items per segment object -->
+
+            <!-- SEGMENT START -->
+            <div ng-repeat="segment in requestSvc.currentRequest.segments">
+                <ion-item class="item-divider" ng-if="!segment.isReturnFlight">
+                    Segment #{{$index + 1}}
+                </ion-item>
+                <ion-item class="item-divider" ng-if="segment.isReturnFlight">
+                    Return Segment
+                </ion-item>
+                <ion-item ng-click="viewSegment(segment)">
+                    <div class="row row-center">
+                        <div class="col-10">
+                            <i class="icon ion-ios-location req-icon"></i>
+                        </div>
+                        <div class="col-80 icon-spacing">
+                            <span class="req-title">
+                                {{segment.departingAirport?segment.departingAirport:"N/A"}} &#8594; {{segment.arrivingAirport?segment.arrivingAirport:"N/A"}}
+                            </span>
+                            <p class="req-detail">
+                                <small>
+                                    Flight Date: {{segment.departureDate && segment.departureTime?utilitySvc.formatFlightDateTime(segment.departureDate, segment.departureTime):"N/A"}}
+                                </small>
+                            </p>
+                            <p class="req-detail">
+                                <small>Airline: {{segment.preferredAirline?segment.preferredAirline:"No"}}</small>
+                            </p>
+                            <p class="req-detail">
+                                <small>Hotel: {{segment.hotel.preferredHotel?segment.hotel.preferredHotel:"No"}}</small>
+                            </p>
+                            <p class="req-detail">
+                                <small>Rental: {{segment.rental.preferredCompany?segment.rental.preferredCompany:"No"}}</small>
+                            </p>
+                        </div>
+                        <div class="col col-offset-10">
+                            <i class="icon ion-chevron-right align-right energized" style="font-size: 48px; padding-left: 15px;"></i>
+                        </div>
+                    </div>
+                    <ion-option-button class="button-assertive" ng-click="deleteSegment(segment)">
+                        Delete
+                    </ion-option-button>
+                </ion-item>
+            </div>
+            <!-- SEGMENT END -->
+        </ion-list>
+        <div ng-if="requestSvc.currentRequest.segments.length >= 3" style="width:100%; height: 50px;"></div>
+    </ion-content>
+    <button class="button button-block button-energized button-float"
+            ng-click="openSegmentWizard()"
+            type="button"
+            style="bottom: 5px !important;background-color:#F2A900 !important; ">
+        <b>ADD A TRAVEL SEGMENT</b>
+    </button>
+</ion-view>
